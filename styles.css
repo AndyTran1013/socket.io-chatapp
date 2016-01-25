@@ -1,4 +1,73 @@
-*{
-	margin: 0;
-	padding: 0;
+body{
+	height: 100vh;
+}
+
+.hidden{
+	border: 1px solid red;
+}
+
+.container{
+	position: relative;
+	top: 25%;
+	max-width: 50%;
+	height: 50%;
+}
+
+#name-prompt{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	color: #FFF;
+	text-align: center;
+}
+
+#prompt-fields{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+#prompt-fields h1{
+	margin-top: 0;
+}
+
+#name-input{
+	border: transparent;
+	border-bottom: 1px solid #FFF;
+	background: transparent;
+	width: 80%;
+	text-align: center;
+}
+
+#msg-box{
+	padding-top: 1em;
+	height: 90%;
+	overflow-y: scroll;
+	border: 1px solid black;
+}
+
+#welcome{
+	text-align: center;
+}
+
+#messages{
+	padding-left: 1.5em;
+	list-style-type: none;
+	font-size: 1.5em;
+}
+
+
+#controls{
+	padding: 1em 0 0 0;
+	height: 10%;
+}
+
+#msg-input{
+	width: 100%;
+	border: 1px solid black;
+}
+
+#msg-input:focus{
+	outline: 1px solid blue;
 }

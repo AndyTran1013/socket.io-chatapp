@@ -1,22 +1,29 @@
-var app = require("express")();
-var http =require("http").Server(app);
+var express = require("express");
+var expApp = express();
+var http =require("http").Server(expApp);
 var port = process.env.PORT || 8000;
 var io = require("socket.io")(http);
 
-app.get("/", function(req, res){
-	res.sendFile(__dirname + "/index.html");
-});
+expApp.use(express.static(__dirname));
+
+var users = []; //store users
 
 io.on("connection", function(socket){
 	console.log ("a user connected");
 
-	socket.on("disconnect",function(){
-			console.log("user disconnected");
+	socket.on("addUser",function(name){
+		socket.username = name;
+		users.push(name);
+		socket.emit("joinChat", users);
+		console.log(socket.username);
 	});
-
-	socket.on("chat message", function(msg){
-		console.log("message: " + msg);
-		socket.emit('chat message', msg);
+	
+	socket.on("disconnect",function(){
+		users.slice(users.indexOf(users.name),1);
+		socket.emit("leave", {
+			users: users,
+			name: socket.username
+		});
 	});
 
 });
@@ -24,3 +31,4 @@ io.on("connection", function(socket){
 http.listen(port, function(){
 	console.log ("listening on %d", port);
 });
+
