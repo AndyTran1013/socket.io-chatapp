@@ -1,26 +1,37 @@
 
 var app  = angular.module("chatApp",[]);
+var msgBox = document.getElementById("msg-box");
 
 app.controller("chatCtrl", ["$scope","socket", function($scope, socket){
 	$scope.users = [];
 	$scope.messages = [];
 	$scope.hidePrompt = false;
 
+
 	$scope.appendUser = function(){
 		socket.emit("addUser", $scope.username);
+		$scope.hidePrompt = true;
 	};
 	
+	$scope.addMsg = function(){
+		socket.emit("newMsg", $scope.msg);
+		$scope.msg = "";
+	};
+
 	socket.on("joinChat", function(data){
-		$scope.users = data;
-		$scope.hidePrompt = true;
-		console.log(data);
+		$scope.users = data.users;
+		$scope.messages.push(data.name + " has connected.");
 	});
 
 	socket.on("leave", function(data){
 		$scope.users = data.users;
-		$scope.messages.push(data.name + "has left.");
-		console.log(data.name);
+		$scope.messages.push(data.name + " has disconnected.");
 	});
+
+	socket.on("newMsg", function(data){
+		$scope.messages.push(data.name + ": " + data.msg);
+	});
+
 
 }]);
 

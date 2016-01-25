@@ -20,41 +20,20 @@
 
 		<div id="msg-box">
 			<h2 id="welcome">Welcome -  {{users.length}} Active Participant(s)</h2>
-			<ul id='messages'><li ng-repeat="msg in messages"></li></ul>
+			<ul id='messages'><li ng-repeat="msg in messages track by $index">{{msg}}</li></ul>
 		</div>
 
 		<div id="controls">
-			<form ng-submit="">
-				<input id='msg-input' autocomplete='off' />
+			<form ng-submit="addMsg()">
+				<input id='msg-input' ng-model="msg" autocomplete='off' />
 			</form>
 		</div>
 
 	</div>
 
-
-
 	<script src="node_modules/angular/angular.min.js"></script>
 	<script src='/socket.io/socket.io.js'></script>
 	<script src="app.js"></script>
 
-
-<!--
-	
-	<script src='http://code.jquery.com/jquery-1.11.1.js'></script>
-	<script>
-		var socket = io();
-		$('form').submit(function(){
-			socket.emit('chat message', $('#msg').val());
-			$('#msg').val('');
-			return false;
-		});
-
-		socket.on('chat message', function(msg){
-			$('#messages').append($('<li>').text(msg));
-		});
-
-	</script> 
-
-	-->
 </body>
 </html>

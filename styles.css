@@ -43,6 +43,7 @@ body{
 #msg-box{
 	padding-top: 1em;
 	height: 90%;
+	overflow-x: hidden;
 	overflow-y: scroll;
 	border: 1px solid black;
 }
@@ -52,9 +53,14 @@ body{
 }
 
 #messages{
+	margin: 0;
 	padding-left: 1.5em;
 	list-style-type: none;
 	font-size: 1.5em;
+}
+
+#messages li{
+	width: 100%;
 }
 
 
