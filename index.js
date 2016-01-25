@@ -27,6 +27,7 @@ io.on("connection", function(socket){
 				users: users,
 				name: socket.username
 			});
+			console.log("%s disconnected. %s user(s) remain.", socket.username, users.length);
 		}
 	});
 
