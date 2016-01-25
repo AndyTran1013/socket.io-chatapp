@@ -36,7 +36,7 @@ io.on("connection", function(socket){
 			msg: msg
 		});
 	});
-
+	
 });
 
 http.listen(port, function(){
